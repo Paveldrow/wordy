@@ -1,0 +1,145 @@
+.loader {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  animation: loaderAnime 500ms linear 1.5s;
+  animation-fill-mode: forwards;
+}
+
+
+@keyframes loaderAnime {
+  0% {
+    display: block;
+    opacity: 1;
+  }
+
+  100% {
+    /* visibility: 0; */
+    opacity: 0;
+    display: none;
+
+  }
+}
+
+.title {
+  position: absolute;
+  top: 30%;
+  right: 0;
+  left: 0;
+  text-align: center;
+  margin: 0 auto;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 78px;
+  background-color: #fff;
+  color: rgb(255,140,0);
+  text-shadow: 
+		-0   -4px 0   #0000CD,
+		 0   -4px 0   #0000CD,
+		-0    4px 0   #0000CD,
+		 0    4px 0   #0000CD,
+		-4px -0   0   #0000CD,
+		 4px -0   0   #0000CD,
+		-4px  0   0   #0000CD,
+		 4px  0   0   #0000CD,
+		-1px -4px 0   #0000CD,
+		 1px -4px 0   #0000CD,
+		-1px  4px 0   #0000CD,
+		 1px  4px 0   #0000CD,
+		-4px -1px 0   #0000CD,
+		 4px -1px 0   #0000CD,
+		-4px  1px 0   #0000CD,
+		 4px  1px 0   #0000CD,
+		-2px -4px 0   #0000CD,
+		 2px -4px 0   #0000CD,
+		-2px  4px 0   #0000CD,
+		 2px  4px 0   #0000CD,
+		-4px -2px 0   #0000CD,
+		 4px -2px 0   #0000CD,
+		-4px  2px 0   #0000CD,
+		 4px  2px 0   #0000CD,
+		-3px -4px 0   #0000CD,
+		 3px -4px 0   #0000CD,
+		-3px  4px 0   #0000CD,
+		 3px  4px 0   #0000CD,
+		-4px -3px 0   #0000CD,
+		 4px -3px 0   #0000CD,
+		-4px  3px 0   #0000CD,
+		 4px  3px 0   #0000CD,
+		-4px -4px 0   #0000CD,
+		 4px -4px 0   #0000CD,
+		-4px  4px 0   #0000CD,
+		 4px  4px 0   #0000CD,
+		-4px -4px 0   #0000CD,
+		 4px -4px 0   #0000CD,
+		-4px  4px 0   #0000CD,
+		 4px  4px 0   #0000CD;
+}
+
+
+
+.title::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 700px;
+  height: 200px;
+  background: #ffffff;
+  background: linear-gradient(to bottom, #ffffff 40%, transparent 100%);
+  /* background:    -moz-linear-gradient(top, #ffffff, transparent);
+  background:      -o-linear-gradient(top, #ffffff, transparent);
+  background:         linear-gradient(top, #ffffff, transparent); */
+  transform: translateX(-50%);
+  animation: titleAnime 1s linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes titleAnime {
+  0% {
+    bottom: 100%;
+  }
+
+  100% {
+    bottom: -120%;
+  }
+}
+
+ul {
+  margin-top: 150px;
+}
+
+li {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  box-sizing: border-box;
+  margin-right: 10px;
+  padding: 0;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  border: none;
+  caret-color: transparent;
+}
+
+.input:focus {
+  box-shadow: 3px 7px 8px 9px rgba(34, 60, 80, 0.2);
+  outline: none;
+  border: 2px solid #449AEA;
+}
