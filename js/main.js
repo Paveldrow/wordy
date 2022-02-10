@@ -3,6 +3,7 @@ const str2 = document.querySelectorAll('.str-2')
 const str3 = document.querySelectorAll('.str-3')
 const str4 = document.querySelectorAll('.str-4')
 const str5 = document.querySelectorAll('.str-5')
+const input = document.querySelectorAll('input')
 
 const str = []
 
@@ -49,52 +50,43 @@ const controller = {
 
   play(model) {
 
-    let j = 0;
-   let activeStr = str[j]
+    for (let j = 0; j < str.length; j++) {
+      checkLine(str[j]);
+    }
 
-  
-    // str = document.querySelectorAll(`.str-${j}`)
+    function checkLine(activeStr) {
+      activeStr.forEach((elem, i) => {
+        console.log(activeStr)
 
-
-
-    activeStr.forEach((elem, i) => {
-
-      elem.addEventListener('input', () => {
-        model.guess = model.guess + elem.value;
-
-        if (model.guess.length <= 4) {
-
-          activeStr[i + 1].focus()
-
-        }
-        else {
-          this.checkWord(model);
-          j++;
-          // str = document.querySelectorAll(`.str-${model.j + 1}`)
-          activeStr = str[j]
-          // str = strLib[j];
-          // j++;
-          activeStr[0].focus()
-
-
-          // console.log(model.guess)
-          console.log(model.guess)
-          model.guess = '';
-          console.log(model.guess);
-        }
+        elem.addEventListener('input', () => {
+          model.guess = model.guess + elem.value;
+          if (model.guess.length <= 4) {
+            activeStr[i + 1].focus();
+          }
+          else {
+            console.log(activeStr)
+            this.checkWord(model, activeStr);
+            activeStr[j].focus();
+            model.guess = '';
+          }
+        })
       })
-    })
+    };
+
+
+
+
   },
 
-  checkWord(model) {
+  checkWord(model, activeStr) {
     for (let i = 0; i < model.guess.length; i++) {
       model.point.indexOf(model.guess[i])
       if (model.point.indexOf(model.guess[i]) >= 0) {
         if (model.point[i] === model.guess[i]) {
-          str1[i].style.backgroundColor = 'green'
+          activeStr[i].style.backgroundColor = 'green'
         }
         else {
-          str1[i].style.backgroundColor = 'yellow'
+          activeStr[i].style.backgroundColor = 'yellow'
         }
       }
       if (model.point.indexOf(model.guess[i]) < 0) {
@@ -102,6 +94,13 @@ const controller = {
       }
       if (model.guess === model.point) {
         console.log('win')
+        this.play(model);
+        this.count = 0;
+
+        input.forEach((item) => {
+          item.value = '';
+          item.style.backgroundColor = 'rgba(0, 0 ,0, 0.1)'
+        })
       }
     }
   },
