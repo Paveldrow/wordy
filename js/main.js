@@ -65,10 +65,10 @@ const controller = {
           controller.checkWord(model, activeStr);
           activeStr = str[model.j];
           
-          if(model.j < str.length) {
+
             activeStr[0].focus();
             model.guess = '';
-          }
+        
 
 
         
@@ -93,12 +93,11 @@ const controller = {
       }
       if (model.guess === model.point) {
         console.log('win')
-return
-
         input.forEach((item) => {
           item.value = '';
           item.style.backgroundColor = 'rgba(0, 0 ,0, 0.1)'
         })
+        return;
       }
     }
   },
