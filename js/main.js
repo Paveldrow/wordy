@@ -49,41 +49,34 @@ const controller = {
   },
 
   play(model) {
-
     for (let j = 0; j < str.length; j++) {
-      checkLine(str[j]);
-
+      this.checkLine(str[j]);
     }
-
-    function checkLine(activeStr) {
-    
-      activeStr.forEach((elem, i) => {
-        console.log(activeStr)
-        console.log(model.j)
-
-        elem.addEventListener('input', () => {
-          model.guess = model.guess + elem.value;
-        console.log(model.guess)
-
-          if (model.guess.length <= 4) {
-            activeStr[i + 1].focus();
-          }
-          else {
-            console.log(activeStr)
-            model.j = model.j + 1;
-            controller.checkWord(model, activeStr);
-            activeStr = str[model.j]
-
-
-            activeStr[0].focus();
-
-            model.guess = '';
-          }
-        })
-      })
-    };
   },
 
+  checkLine(activeStr) {
+    activeStr.forEach((elem, i) => {
+      elem.addEventListener('input', () => {
+        model.guess = model.guess + elem.value;
+        if (model.guess.length <= 4) {
+          activeStr[i + 1].focus();
+        } else {
+          model.j = model.j + 1;
+          controller.checkWord(model, activeStr);
+          activeStr = str[model.j];
+          
+          if(model.j < str.length) {
+            activeStr[0].focus();
+            model.guess = '';
+          }
+
+
+        
+          // return
+        }
+      })
+    })
+  },
   checkWord(model, activeStr) {
     for (let i = 0; i < model.guess.length; i++) {
       model.point.indexOf(model.guess[i])
@@ -100,8 +93,7 @@ const controller = {
       }
       if (model.guess === model.point) {
         console.log('win')
-        this.play(model);
-        this.count = 0;
+return
 
         input.forEach((item) => {
           item.value = '';
