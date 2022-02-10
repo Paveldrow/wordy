@@ -52,30 +52,36 @@ const controller = {
 
     for (let j = 0; j < str.length; j++) {
       checkLine(str[j]);
+
     }
 
     function checkLine(activeStr) {
+    
       activeStr.forEach((elem, i) => {
         console.log(activeStr)
+        console.log(model.j)
 
         elem.addEventListener('input', () => {
           model.guess = model.guess + elem.value;
+        console.log(model.guess)
+
           if (model.guess.length <= 4) {
             activeStr[i + 1].focus();
           }
           else {
             console.log(activeStr)
-            this.checkWord(model, activeStr);
-            activeStr[j].focus();
+            model.j = model.j + 1;
+            controller.checkWord(model, activeStr);
+            activeStr = str[model.j]
+
+
+            activeStr[0].focus();
+
             model.guess = '';
           }
         })
       })
     };
-
-
-
-
   },
 
   checkWord(model, activeStr) {
@@ -110,7 +116,7 @@ const controller = {
 const model = {
   guess: '',
   point: controller.getWord(wordsLib),
-  j: 1,
+  j: 0,
 }
 
 // checkWord(model, point) {
