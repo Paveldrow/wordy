@@ -1,19 +1,3 @@
-const str1 = document.querySelectorAll('.str-1')
-const str2 = document.querySelectorAll('.str-2')
-const str3 = document.querySelectorAll('.str-3')
-const str4 = document.querySelectorAll('.str-4')
-const str5 = document.querySelectorAll('.str-5')
-const input = document.querySelectorAll('input')
-
-const str = []
-
-str.push(str1);
-str.push(str2);
-str.push(str3);
-str.push(str4);
-str.push(str5);
-// const col2 = document.querySelector('.col-5')
-
 const wordsLib = [
   'бизон',
   'жираф',
@@ -35,12 +19,15 @@ const wordsLib = [
   'пчела',
   'комар',
   'шмель',
+  'выдра',
+  'петух',
+  'дятел',
+  'крыса',
+  'ворон',
+  'гиена',
+  'индюк',
+  'манул',
 ];
-
-console.log(str)
-
-const view = {
-}
 
 const controller = {
   getWord(wordsLib) {
@@ -48,9 +35,19 @@ const controller = {
     return wordsLib[random]
   },
 
+  getlineArr(model) {
+    const line = document.querySelectorAll('.line')
+    for (let i = 0; i < line.length; i++) {
+      let newLine = [...document.querySelectorAll(`.str-${i + 1}`)];
+      console.log(newLine)
+      model.lineArr.push(newLine);
+    }
+  },
+
   play(model) {
-    for (let j = 0; j < str.length; j++) {
-      this.checkLine(str[j]);
+    this.getlineArr(model)
+    for (let j = 0; j < model.lineArr.length; j++) {
+      this.checkLine(model.lineArr[j]);
     }
   },
 
@@ -61,22 +58,28 @@ const controller = {
         if (model.guess.length <= 4) {
           activeStr[i + 1].focus();
         } else {
-          model.j = model.j + 1;
           controller.checkWord(model, activeStr);
-          activeStr = str[model.j];
-          
+          model.j = model.j + 1;
 
-            activeStr[0].focus();
+          if (model.win === true) {
             model.guess = '';
-        
+            model.j = 0;
+            // controller.play(model);
+            model.win = false;
+            
+          } else {
 
+            model.guess = '';
+          }
+          activeStr = model.lineArr[model.j];
 
-        
-          // return
+          activeStr[0].focus();
         }
       })
     })
   },
+
+
   checkWord(model, activeStr) {
     for (let i = 0; i < model.guess.length; i++) {
       model.point.indexOf(model.guess[i])
@@ -92,12 +95,16 @@ const controller = {
         console.log('miss');
       }
       if (model.guess === model.point) {
+        const inputs = document.querySelectorAll('input');
+        const input1 = document.querySelectorAll('input')[0];
+        console.log(input1)
+        input1.focus();
         console.log('win')
-        input.forEach((item) => {
+        inputs.forEach((item, i) => {
           item.value = '';
           item.style.backgroundColor = 'rgba(0, 0 ,0, 0.1)'
-        })
-        return;
+        });
+        model.win = true;
       }
     }
   },
@@ -108,125 +115,18 @@ const model = {
   guess: '',
   point: controller.getWord(wordsLib),
   j: 0,
+  lineArr: [],
+  win: false,
 }
 
-// checkWord(model, point) {
-//   for (let i = 0; i < guess.length; i++) {
-//     point.indexOf(model.guess[i])
-//     if (point.indexOf(model.guess[i]) >= 0) {
-//       if (point[i] === model.guess[i]) {
-//         str[i].style.backgroundColor = 'green'
-//       }
-//       else {
-//         str[i].style.backgroundColor = 'yellow'
-//       }
-//     }
-//     if (point.indexOf(model.guess[i]) < 0) {
-//       console.log('miss');
-//     }
-//     if (model.guess === point) {
-//       console.log('win')
-//     }
-//   }
-// },
+
+
+
+
+
+
 
 
 
 controller.play(model);
 console.log(model.point)
-
-
-
-
-
-
-
-
-// function start() {
-
-//   function getWord(wordsLib) {
-//     const random = Math.floor(Math.random() * wordsArr.length);
-//     return wordsArr[random];
-//   }
-
-
-//   const fo = getWord();
-//   console.log(fo)
-//   const line = document.querySelectorAll('.line')
-//   let str
-
-//   const strLib = []
-//   strLib.push(str1)
-//   strLib.push(str2)
-//   strLib.push(str3)
-//   strLib.push(str4)
-//   strLib.push(str5)
-
-//   str = str1;
-
-//   function checkWord(word, fo) {
-//     let item = '';
-
-//     for (let i = 0; i < word.length; i++) {
-
-//       fo.indexOf(word[i])
-
-//       if (fo.indexOf(word[i]) >= 0) {
-//         if (fo[i] === word[i]) {
-//           str[i].style.backgroundColor = 'green'
-//         }
-//         else {
-//           str[i].style.backgroundColor = 'yellow'
-//         }
-//       }
-//       if (fo.indexOf(word[i]) < 0) {
-//         console.log('miss');
-//       }
-//       item = item + word[i];
-//       if (item === fo) {
-
-//       }
-
-
-//     }
-
-//   }
-
-//   let arr = ''
-//   let strCount = 0;
-
-//   function play() {
-
-
-//     str.forEach((elem, i) => {
-//       elem.addEventListener('input', () => {
-//         if (arr.length <= 4) {
-//           arr = arr + elem.value;
-//           if (i < 4) {
-//             str[i + 1].focus()
-//           }
-//           else {
-
-
-//             checkWord(arr, fo);
-//             strCount++;
-//             str = strLib[strCount];
-//             str[0].focus();
-//             console.log(arr)
-//             arr = '';
-
-//             play();
-//           }
-
-//         }
-
-
-//       })
-//     })
-//   }
-
-
-//   play()
-// }
-// start();
-
