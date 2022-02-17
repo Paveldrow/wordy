@@ -1,5 +1,5 @@
 .loader {
-  display: none;
+  /* display: none; */
   position: fixed;
   left: 0;
   top: 0;
@@ -9,7 +9,6 @@
   animation: loaderAnime 500ms linear 1.5s;
   animation-fill-mode: forwards;
 }
-
 
 @keyframes loaderAnime {
   0% {
@@ -129,6 +128,8 @@ li {
   box-sizing: border-box;
   margin-right: 10px;
   padding: 0;
+  padding-bottom: 7px;
+  text-align: center;
   font-family: sans-serif;
   font-weight: 400;
   font-size: 50px;

@@ -66,29 +66,33 @@ const controller = {
             model.j = 0;
             // controller.play(model);
             model.win = false;
-
-          } else {
-
-            model.guess = '';
+            location.reload();
           }
+          if (model.j == model.lineArr.length) {
+            location.reload();
+
+
+          }
+          model.guess = '';
           activeStr = model.lineArr[model.j];
 
           activeStr[0].focus();
+
         }
+
       })
     })
   },
 
-
   checkWord(model, activeStr) {
     for (let i = 0; i < model.guess.length; i++) {
-      model.point.indexOf(model.guess[i])
+      model.point.indexOf(model.guess[i]);
       if (model.point.indexOf(model.guess[i]) >= 0) {
         if (model.point[i] === model.guess[i]) {
-          activeStr[i].style.backgroundColor = 'green'
+          activeStr[i].style.backgroundColor = 'green';
         }
         else {
-          activeStr[i].style.backgroundColor = 'yellow'
+          activeStr[i].style.backgroundColor = 'yellow';
         }
       }
       if (model.point.indexOf(model.guess[i]) < 0) {
@@ -97,12 +101,12 @@ const controller = {
       if (model.guess === model.point) {
         const inputs = document.querySelectorAll('input');
         const input1 = document.querySelectorAll('input')[0];
-        console.log(input1)
+        console.log(input1);
         input1.focus();
-        console.log('win')
+        console.log('win');
         inputs.forEach((item, i) => {
           item.value = '';
-          item.style.backgroundColor = 'rgba(0, 0 ,0, 0.1)';
+          item.style.backgroundColor = 'rgba(0, 0 ,0, 0.1)'
         });
         model.win = true;
       }
@@ -119,4 +123,4 @@ const model = {
 };
 
 controller.play(model);
-console.log(model.point)
+console.log(model.point);
